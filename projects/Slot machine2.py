@@ -140,7 +140,7 @@ def create_spin():
     for _ in range(COLS):
         column = []
         current_symbols = all_symbols[:]
-
+        
         for row in range(ROWS):
             symbol = random.choice(current_symbols)
             column.append(symbol)
