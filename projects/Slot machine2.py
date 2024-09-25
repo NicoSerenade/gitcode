@@ -102,16 +102,15 @@ def get_bet(balance, lines):
         bet = input(f'How much would you like to bet on each line? $')
         if bet.isdigit():
             bet = int(bet)
-            total_bet = bet * lines
             if bet >= MIN_BET:
+                total_bet = bet * lines
                 if total_bet <= balance:
                     print(f"You're betting {bet} on {lines} lines, for a total bet of {total_bet}")
                     break
                 else:
                     print(f"You have not enough money, your current balance is {balance}")
             else:
-                print(f'{MIN_BET} is the minimum valid bet') #perhaps I OCDE IT TWICE 
-                
+                print(f'{MIN_BET} is the minimum valid bet') #maybe I CODE IT TWICE        
         else:
             print('Invalid choice') 
     return bet, total_bet
@@ -178,7 +177,7 @@ def check_spin(lines, columns, bet, symbols_value):
 
 def print_result(winnings, biggest_prize, winning_lines):
     if biggest_prize:
-        print(f'CONGRATS, YOU SPUN THE BIGGETS PRIZE {len(biggest_prize)} TIMES! {SPECIAL_SYMBOL}')
+        print(f'Congratulations, you spun the biggest prize {len(biggest_prize)} TIMES! {SPECIAL_SYMBOL}')
     if winnings:
         print(f'You won ${winnings}!')
         if len(winning_lines) > 1:
@@ -188,50 +187,75 @@ def print_result(winnings, biggest_prize, winning_lines):
     else:
         print('You\'ve lost')
 
-
-
-
-
 def game(name, balance, free_game):
-    print(f'Your current balance is ${balance}')
-    choice = input(f'Enter (y) to play or (n) to quit')
-    if choice == 'y':
-        while balance >= MIN_DEPOSIT:
-            lines = get_lines()
-            bet = get_bet(balance, lines)
-            while True:
-                go_back = start_button()
-                if go_back:
-                    break
-                columns = create_spin()
-                print_spin(columns)
-                winnings, biggest_prize, winning_lines = check_spin(lines, columns, bet, symbols_value) #PROBLEM
-                print_result(winnings, biggest_prize, winning_lines)
-
-
-def main():
     while True:
-        create_database()
-        free_game = False
+        while balance >= MIN_DEPOSIT:
+            print(f'Your current balance is ${balance}')
+            choice = input(f'Enter (y) to spin or (n) to quit: ')
+            if choice == 'y':
+                lines = get_lines()
+                bet, total_bet = get_bet(balance, lines)
+                while True:
+                    go_back = start_button()
+                    if go_back:
+                        break
+                    columns = create_spin()
+                    print_spin(columns)
+                    winnings, biggest_prize, winning_lines = check_spin(lines, columns, bet, symbols_value)
+                    balance += winnings - total_bet
+                    print_result(winnings, biggest_prize, winning_lines)
+                    free_game = False
+                    break
 
-        welcome()
-        name = user()
-        is_registered = check_name_database(name)
-        if is_registered:
-            print(f'Welcome again {name}!')
-            balance = deposit()
-            game(name, balance, free_game)
+            elif choice == 'n' and free_game:
+                print('You cannot quit in the first spin of free games')
+            elif choice == 'n':
+                if name:
+                    print(f'Thank you for betting with us {name}, you left with ${balance}')
+                else:
+                    print(f'Thank you for betting with dear guest, you left with ${balance}')
+                sys.exit()
+            else: 
+                print('Invalid choice')
 
-        elif name and not is_registered:
-            print(f'{name} has been registered successfully')
-            print(f'{name}, free spin has just started')
-            free_game = True
-            game(name, balance, free_game)
-        else:
-            balance = deposit()
-            game(name, balance, free_game)
-        #final_menu()
+        print(f'Your current balance is ${balance}')
+        print(f'The minimum valid balance is ${MIN_DEPOSIT}')
+        while True:
+            choice = input(f'Enter (y) to deposit or (n) to quit')
+            if choice == 'y':
+                print('Great choice!')
+                balance += deposit()
+                break
+            elif choice == 'n':
+                if name:
+                    print(f'Thank you for betting with us {name}, you left with ${balance}')
+                else:
+                    print(f'Thank you for betting with dear guest, you left with ${balance}')
+                sys.exit()
+            else:
+                print('Invalid choice')
+    
+def main():
+    create_database()
+    free_game = False
 
+    welcome()
+    name = user()
+    is_registered = check_name_database(name)
+    if is_registered:
+        print(f'Welcome again {name}!')
+        balance = deposit()
+        game(name, balance, free_game)
+
+    elif name and not is_registered:
+        print(f'{name} has been registered successfully')
+        print(f'{name}, free spin has just started')
+        balance = 30
+        free_game = True
+        game(name, balance, free_game)
+    else:
+        balance = deposit()
+        game(name, balance, free_game)
 
 if __name__ == '__main__':
     main()
