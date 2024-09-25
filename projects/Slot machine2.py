@@ -86,7 +86,7 @@ def deposit():
 def get_lines():
     while True:
         print('If you bet on 1 line, it will be on line 1, betting on 2 lines, on line 1 and 2, etc...')
-        lines = input(f'Enter the number of lines to bet on. (1-{MAX_LINES}) ')
+        lines = input(f'Enter the number of lines to bet on (1-{MAX_LINES}): ')
         if lines.isdigit():
             lines = int(lines)
             if 1 <= lines <= MAX_LINES:
@@ -110,7 +110,7 @@ def get_bet(balance, lines):
                 else:
                     print(f"You have not enough money, your current balance is {balance}")
             else:
-                print(f'{MIN_BET} is the minimum valid bet') #maybe I CODE IT TWICE        
+                print(f'{MIN_BET} is the minimum valid bet')     
         else:
             print('Invalid choice') 
     return bet, total_bet
@@ -140,7 +140,7 @@ def create_spin():
     for _ in range(COLS):
         column = []
         current_symbols = all_symbols[:]
-        
+
         for row in range(ROWS):
             symbol = random.choice(current_symbols)
             column.append(symbol)
@@ -159,8 +159,8 @@ def print_spin(columns):
 def check_spin(lines, columns, bet, symbols_value):
     winnings = 0
     winning_lines = []
-    biggest_prize = []
-
+    biggest_prize = 0
+    
     for line in range(lines):
         symbol = columns[0][line]
         for column in columns:
@@ -168,17 +168,17 @@ def check_spin(lines, columns, bet, symbols_value):
             if check_symbol != symbol:
                 break
         else:
-            if symbol == SPECIAL_SYMBOL:
-                biggest_prize.append(symbol)
             winnings += symbols_value[symbol] * bet
             winning_lines.append(line + 1)
+            if symbol == SPECIAL_SYMBOL:
+                biggest_prize += 1
 
     return winnings, winning_lines, biggest_prize
 
 def print_result(winnings, biggest_prize, winning_lines):
-    if biggest_prize:
-        print(f'Congratulations, you spun the biggest prize {len(biggest_prize)} TIMES! {SPECIAL_SYMBOL}')
-    if winnings:
+    if biggest_prize > 0:
+        print(f'Congratulations, you spun the biggest prize {biggest_prize} TIMES! {SPECIAL_SYMBOL}')
+    if winnings > 0:
         print(f'You won ${winnings}!')
         if len(winning_lines) > 1:
             print(f"You won on lines {', '.join(map(str, winning_lines))}")
@@ -201,7 +201,7 @@ def game(name, balance, free_game):
                         break
                     columns = create_spin()
                     print_spin(columns)
-                    winnings, biggest_prize, winning_lines = check_spin(lines, columns, bet, symbols_value)
+                    winnings, winning_lines, biggest_prize = check_spin(lines, columns, bet, symbols_value)
                     balance += winnings - total_bet
                     print_result(winnings, biggest_prize, winning_lines)
                     free_game = False
@@ -221,7 +221,7 @@ def game(name, balance, free_game):
         print(f'Your current balance is ${balance}')
         print(f'The minimum valid balance is ${MIN_DEPOSIT}')
         while True:
-            choice = input(f'Enter (y) to deposit or (n) to quit')
+            choice = input(f'Enter (y) to deposit or (n) to quit: ')
             if choice == 'y':
                 print('Great choice!')
                 balance += deposit()
@@ -259,9 +259,6 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
 
 
 
