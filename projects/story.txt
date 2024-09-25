@@ -1,0 +1,3 @@
+Today I arrived to <place>. It was really <weather> outside, so I decided to wear my <clothing>. 
+When I got there, I saw a <adjective_animal> <animal>. It was <verb> around, and it made me <reaction>!
+Certainly, <place> is worse than ever place I have never seen.
