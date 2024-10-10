@@ -1,0 +1,11 @@
+Age,Salary,Experience,Department,Purchased
+25.0,50000.0,2.0,HR,No
+30.0,60000.0,5.0,Engineering,Yes
+35.0,65000.0,7.0,Marketing,Yes
+40.0,70000.0,10.0,Sales,No
+45.0,80000.0,12.0,Finance,Yes
+50.0,90000.0,15.0,Engineering,Yes
+29.0,,4.0,HR,No
+34.0,67000.0,8.0,Sales,Yes
+,720000.0,6.0,Machine Learning,No
+42.0,,,Finance,Yes
