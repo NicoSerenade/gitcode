@@ -21,6 +21,7 @@ For example, if one feature represents age (0-100) and another represents income
 # data.max() - data.min() equals 40 in this example.
 # [0, 10, 20, 30, 40] / 40 gives [0, 0.25, 0.5, 0.75, 1].
 # This operation scales the values so that the smallest becomes 0 and the largest becomes 1.
+# as I'm substracting the same and dividing by the same all data, it keeps the proportion.
 import numpy as np
 
 data = np.array([150, 160, 170, 180, 190])
