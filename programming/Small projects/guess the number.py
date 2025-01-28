@@ -3,13 +3,14 @@ import sys
 
 def user_input():
     while True:
-        try:  
-            guess_num = int(input("Enter your guess: "))
+        guess_num = input("Enter your guess: "))
+        if guess_num.isdigit():
+            guess_num = int(guess_num)
             if guess_num in range(1, 101):
                 return guess_num
             else:
                 print("Invalid choice")
-        except ValueError:
+        else:
             print('Invalid choice')
         
 def check_num(guess_num, num, attempts):
@@ -33,7 +34,7 @@ def restart():
                 print("See ya!")
                 return False
         else:
-            print("invalid choice")
+            print("Invalid choice")
         
 def main():
     while True:
