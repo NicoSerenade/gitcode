@@ -36,3 +36,17 @@ def calcular_ganancia_conductor(distancia_recorrida: float, tiempo_transcurrido:
     tarifa_dinamica = calcular_tarifa_dinamica(distancia_recorrida, tiempo_transcurrido, indice_demanda)
     ganancia = (tarifa_dinamica * PORCENTAJE_CONDUCTOR) + (FACTOR_BONIFICACION * calificacion_conductor)
     return round(ganancia,2)
+
+def ganancia_neta_mensual(cantidad_kilometros: float, tarifa_kilometro: float, precio_galon: float, costo_mantenimiento: float)->float:
+    ingreso = cantidad_kilometros * tarifa_kilometro
+    km_per_galon = ((1/0.08) * 1)
+    gasto_galones = (cantidad_kilometros/km_per_galon) * precio_galon
+    gasto_mantenimiento = (cantidad_kilometros//1000) * costo_mantenimiento
+    gastos_totales = gasto_galones + gasto_mantenimiento
+    ganancia_neta = ingreso - gastos_totales
+    return ganancia_neta
+    
+def retorno_inversion(cantidad_kilometros: float, tarifa_kilometro: float, precio_galon: float, costo_mantenimiento: float, precio_veiculo: float)->float:
+    ganancia_neta_mes = ganancia_neta_mensual(cantidad_kilometros, tarifa_kilometro, precio_galon, costo_mantenimiento)
+    meses_retorno = precio_veiculo/ganancia_neta_mes
+    return meses_retorno
