@@ -39,9 +39,12 @@ def calcular_ganancia_conductor(distancia_recorrida: float, tiempo_transcurrido:
 
 def ganancia_neta_mensual(cantidad_kilometros: float, tarifa_kilometro: float, precio_galon: float, costo_mantenimiento: float)->float:
     ingreso = cantidad_kilometros * tarifa_kilometro
-    km_per_galon = ((1/0.08) * 1)
-    gasto_galones = (cantidad_kilometros/km_per_galon) * precio_galon
+    #km_per_galon = ((1/0.08) * 1)
+    #gasto_galones = (cantidad_kilometros/km_per_galon) * precio_galon
+    gasto_galones = (cantidad_kilometros*0.08) * precio_galon
+
     gasto_mantenimiento = (cantidad_kilometros//1000) * costo_mantenimiento
+    
     gastos_totales = gasto_galones + gasto_mantenimiento
     ganancia_neta = ingreso - gastos_totales
     return ganancia_neta

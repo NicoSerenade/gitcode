@@ -1,4 +1,4 @@
-import cupify as c
+import logic as l
 
 def run_calcular_ganancia_conductor():
     distancia_recorrida = float(input("Digite la distancia recorrida: "))
@@ -6,7 +6,7 @@ def run_calcular_ganancia_conductor():
     indice_demanda = float(input("Digite el indice demanda: "))
     calificacion_conductor = int(input("Digite la calificacion del conductor: "))
 
-    ganancia_conductor = c.calcular_ganancia_conductor(distancia_recorrida, tiempo_transcurrido, indice_demanda, calificacion_conductor)
+    ganancia_conductor = l.calcular_ganancia_conductor(distancia_recorrida, tiempo_transcurrido, indice_demanda, calificacion_conductor)
     
     print("La ganancia del conductor es:", ganancia_conductor)
 

@@ -1,11 +1,11 @@
-import cupify as c
+import logic as l
 
 def run_calcular_tarifa_total()->None:
     distancia_recorrida = float(input("Digite la distancia recorrida: "))
     tiempo_transcurrido = float(input("Digite el tiempo transcurrido: "))
     indice_demanda = float(input("Digite el indice demanda: "))
 
-    tarifa_total = c.calcular_tarifa_total(distancia_recorrida, tiempo_transcurrido, indice_demanda)
+    tarifa_total = l.calcular_tarifa_total(distancia_recorrida, tiempo_transcurrido, indice_demanda)
 
     print("La tarifa total es:", tarifa_total)
 
