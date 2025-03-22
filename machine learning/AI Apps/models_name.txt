@@ -1,0 +1,17 @@
+Text generation
+"meta-llama/Llama-3.2-1B-Instruct"
+"EleutherAI/gpt-neo-2.7B"
+"mistralai/Mistral-7B-Instruct-v0.2"
+
+Reasoning models
+"deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B"
+
+
+Summarization
+"facebook/bart-large-cnn"
+
+Text to audio
+"sesame/csm-1b"
+
+Translation
+"google-t5/t5-base"
