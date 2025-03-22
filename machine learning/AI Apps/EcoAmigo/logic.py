@@ -7,16 +7,16 @@ import torch
 set_verbosity_error()
 
 with open("formatted_prompt.txt", "r", encoding="utf-8") as file:
-    ECO_AMIGO_PROMPT = file.read()
+    guidelines = file.read()
 
 MODEL_NAME = "meta-llama/Llama-3.2-1B-Instruct"
 
-def prompt_template():
+def prompt_template(guidelines):
         template = PromptTemplate.from_template(
             "Provide practical advice (in Spanish language and wih around 400 tokens at most) for the following question, following the guidelines shown after the question\n\n"
             "User question: {question}\n\n"
             "Guidelines:"
-            f"{ECO_AMIGO_PROMPT}\n\n"
+            f"{guidelines}\n\n"
             "mark_model_answer:"
         )
         return template
@@ -48,11 +48,6 @@ def initialize_model1():
     
     except Exception as e:
         print(f"Error initializing model1: {e}")
-
-
-    
-    except Exception as e:
-        print(f"Error initializing model2: {e}")
         
 def get_answer_chain(template, llm):
         answer_chain = template | llm
