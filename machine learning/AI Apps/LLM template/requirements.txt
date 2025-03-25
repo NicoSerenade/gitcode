@@ -1,5 +1,5 @@
 transformers
 langchain
 langchain-huggingface
-accelerate>=0.26.0
+ accelerate>=0.26.0
 "pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126 (if CUDA 12.6)"

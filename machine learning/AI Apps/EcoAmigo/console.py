@@ -2,9 +2,9 @@ import logic as l
 
 def run_get_advice():
     print("\n" + "="*60)
-    question = input("Enter your water management question or scenario:\n")
+    question = input("Preguntale a EcoAmigo:\n")
     
-    print("\nGenerating water management advice...")
+    print("\nGenerando respuesta...")
     advice = l.get_water_advice(question)
     
     print("\nWater Management Advice:")
@@ -14,18 +14,18 @@ def run_get_advice():
 
 def run_app():
     print("="*60)
-    print("Welcome to the Water Management Advisor!")
-    print("This advisor provides expert guidance on water conservation,")
+    print("Bienvenido a EcoAmigo!")
+    print("Este consultor ofrece orientación experta sobre la conservación del agua en bogotá.")
     print("="*60)
     
     while True:
         run_get_advice()
-        continue_choice = input("\nWould you like more water management advice? (y/n): ").lower()
+        continue_choice = input("\nTienes otra inquietud? (y/n): ").lower()
         if continue_choice == "n":
             break
 
-    print("\nThank you for using the Water Management Advisor!")
-    print("Remember to conserve water - every drop counts!")
+    print("\nGracias por usar a EcoAmigo!")
+    print("Recuerda conservar el agua: cada gota cuenta!")
 
 if __name__ == "__main__":
     run_app()

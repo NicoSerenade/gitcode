@@ -2,22 +2,21 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModelForSeq2Se
 from langchain_huggingface import HuggingFacePipeline
 from langchain.prompts import PromptTemplate
 from transformers.utils.logging import set_verbosity_error
-
 import torch
 
 set_verbosity_error()
 
+with open("formatted_prompt.txt", "r", encoding="utf-8") as file:
+    guidelines = file.read()
+
 MODEL_NAME = "meta-llama/Llama-3.2-1B-Instruct"
 
-with open("formatted_prompt.txt", "r", encoding="utf-8") as file:
-    GUIDELINES = file.read()
-
-def prompt_template():
+def prompt_template(guidelines):
         template = PromptTemplate.from_template(
             "Provide practical advice (in Spanish language and wih around 400 tokens at most) for the following question, following the guidelines shown after the question\n\n"
             "User question: {question}\n\n"
             "Guidelines:"
-            f"{GUIDELINES}\n\n"
+            f"{guidelines}\n\n"
             "mark_model_answer:"
         )
         return template
